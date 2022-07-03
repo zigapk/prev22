@@ -1,0 +1,4 @@
+fun mainFunction() : void
+= {
+    (a : char) = '\'';
+}

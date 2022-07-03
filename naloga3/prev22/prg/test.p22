@@ -1,0 +1,13 @@
+fun main() : void = {
+    # Expressions
+    5;
+    # 5
+    'c';
+    '\'';
+    "Hello World!";
+    (true);
+    i = sum(( j : int), 0);
+
+    arr[5 + 3]^.name;
+
+}

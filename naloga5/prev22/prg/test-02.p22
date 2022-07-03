@@ -1,0 +1,101 @@
+fun exit():void
+fun putChar(c:char):void
+fun getChar():char
+
+fun putInt(i:int):void =
+    {
+      if (i<0) then { putChar('-'); i=-i; } else none;
+      if (i==0) then putChar('0') else put(i);
+    }
+    where
+    {
+      fun put(i:int):void =
+          {
+            if (i==0) then none else {
+              put(i/10);
+              putChar(((i%10+('0':int)):char));
+            };
+          }
+    }
+
+fun getInt():int =
+    {
+      sign=1;
+      val=0;
+      c = getChar();
+      if (c=='+') then { sign=+1; c='0'; } else
+      if (c=='-') then { sign=-1; c='0'; } else
+      if (c<'0')|(c>'9') then exit() else none;
+      while ('0'<=c)&(c<='9') do {
+        val=val*10+((c:int)-('0':int));
+        c=getChar();
+      };
+      if (c!=(10:char)) then exit() else none;
+      sign * val;
+    }
+    where
+    {
+      var sign:int
+      var val:int
+      var c:char
+    }
+
+fun putString(s:^char):void =
+    {
+      i=0;
+      while (((s:int)+(i*8):^char)^!=(0:char)) do {
+        putChar(((s:int)+(i*8):^char)^);
+        i=i+1;
+      };
+      none;
+    }
+    where
+    {
+      var i:int
+    }
+
+#---------------------------------------------------------------
+
+fun fibItr(n:int):int =
+    {
+      f1=1;
+      f2=1;
+      while (n>2) do {
+        f1=f1+f2;
+        { tmp=f1; f1=f2; f2=tmp; } where { var tmp:int };
+        n=n-1;
+      };
+      f2;
+    }
+    where
+    {
+      var f1:int
+      var f2:int
+      var f:int
+    }
+
+fun fibRec(n:int):int =
+    {
+      if n==1 then f=1 else
+      if n==2 then f=1 else
+      f=fibRec(n-2)+fibRec(n-1);
+      f;
+    }
+    where
+    {
+      var f:int
+    }
+
+fun main():int =
+    {
+      n=getInt();
+      putInt(fibItr(n));
+      putChar((10:char));
+      putInt(fibRec(n));
+      putChar((10:char));
+      0;
+    }
+    where
+    {
+      var n:int
+    }

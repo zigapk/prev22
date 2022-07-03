@@ -1,0 +1,124 @@
+var grid : [3][3]int
+var turn : char
+# 0 = empty
+# 1 = X
+# 2 = O
+
+# Reads chars one by on from stdin and writes them back to stdout.
+fun main(): int = {
+	init();
+	draw();
+	newLine();
+
+	while true do {
+		input();
+		draw();
+		newLine();
+	};
+    0;
+}
+
+fun input():void = {
+	if turn == 'X' then {
+		putString("X's turn!");
+		newLine();
+	} else {
+		putString("O's turn!");
+		newLine();
+	};
+
+	putString("Enter row [0-2]: ");
+	c = getChar();
+	getChar(); # new line
+	row = (c:int) - ('0':int);
+	putString("Enter column [0-2]: ");
+	c = getChar();
+	getChar(); # new line
+	col = (c:int) - ('0':int);
+
+	if turn == 'X' then {
+		grid[row][col] = 1;
+		turn = 'O';
+	} else {
+		grid[row][col] = 2;
+		turn = 'X';
+	};
+
+	none;
+} where {
+	var c : char
+	var row : int
+	var col : int
+}
+
+fun init() : void = {
+	x = 0;
+	y = 0;
+	turn = 'X';
+	while y < 3 do {
+		while x < 3 do {
+			grid[x][y] = 0;
+			x = x + 1;
+		};
+		x = 0;
+		y = y + 1;
+	};
+} where {
+	var x : int
+	var y : int
+}
+
+
+
+fun draw() : void = {
+	x = 0;
+	y = 0;
+	while y < 3 do {
+		while x < 3 do {
+			if grid[y][x] == 0 then {
+				putChar(' ');
+			} else {
+				if grid[y][x] == 1 then {
+					putChar('X');
+				} else {
+					putChar('O');
+				};
+			};
+			if x < 2 then {
+				putChar('|');
+			} else none;
+			x = x + 1;
+		};
+
+		if y < 2 then {
+			newLine();
+			putString("-+-+-");
+		} else none;
+
+		newLine();
+		x = 0;
+		y = y + 1;
+	};
+} where {
+	var x : int
+	var y : int
+}
+
+fun putChar(c : char) : void
+fun getChar() : char
+fun newLine() : void = putChar((10:char))
+fun putString(s : ^char) : int = {
+	count = 0;
+	x = (s : ^int);
+	while x^ != 0 do {
+		a = x^;
+		putChar((a:char));
+		x = ((x : int) + 8 : ^int);
+		count = count + 1;
+	};
+	count;
+} where {
+	var x : ^int
+	var count : int
+	var a : int
+}

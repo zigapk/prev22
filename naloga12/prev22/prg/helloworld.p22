@@ -1,0 +1,24 @@
+fun main(): int = {
+	putString("Hello, World! My name is \"prev22\".");
+	newLine();
+    0;
+}
+
+fun putChar(c : char) : void
+fun getChar() : char
+fun newLine() : void = putChar((10:char))
+fun putString(s : ^char) : int = {
+	count = 0;
+	x = (s : ^int);
+	while x^ != 0 do {
+		a = x^;
+		putChar((a:char));
+		x = ((x : int) + 8 : ^int);
+		count = count + 1;
+	};
+	count;
+} where {
+	var x : ^int
+	var count : int
+	var a : int
+}

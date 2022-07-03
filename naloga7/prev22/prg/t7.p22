@@ -1,0 +1,9 @@
+fun f(b : char) : int = {
+	g(5) where {
+		fun g(a : int) : int = {
+			h(a) where {
+				fun h(p : int) : int = (b: int)
+			};
+		}
+	};
+}

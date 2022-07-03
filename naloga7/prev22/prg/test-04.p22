@@ -1,0 +1,11 @@
+typ c1 = c2
+typ c2 = c1
+
+typ r1 = {x:int,y:int}
+typ r2 = {y:int,x:int}
+
+var a1 : r1
+var a2 : r2
+
+fun main():int = a1.x+a2.y
+
